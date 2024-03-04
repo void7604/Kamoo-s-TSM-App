@@ -92,5 +92,11 @@ jobs:
           ${{ env.DB_PATH }}/*eu*.json
     - name: Reset Rate Limit (sleep 1 minute)
       run: sleep 60
-    - name: export appData
-      run: python -m ah.tsm_exporter --repo https://github.com/void7604/Kamoo-s-TSM-App eu 'Tarren Mill' 'Area 52'
+    - name: export AppData
+      run: python -m ah.tsm_exporter --warcraft_base release --repo https://github.com/void7604/Kamoo-s-TSM-App eu 'Tarren Mill' 'Area 52'
+    - name: release AppData
+      uses: softprops/action-gh-release@4634c16e79c963813287e889244c50009e7f0981
+      with:
+        tag_name: latest
+        files: |
+          Export/AppData.lua

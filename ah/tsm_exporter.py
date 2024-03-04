@@ -121,6 +121,9 @@ class TSMExporter:
     def get_tsm_appdata_path(
         cls, warcraft_base: str, game_version: GameVersionEnum
     ) -> str:
+        if warcraft_base == "release":
+            return "Export/AppData.lua"
+        
         return os.path.join(
             warcraft_base,
             game_version.get_version_folder_name(),
@@ -150,6 +153,10 @@ class TSMExporter:
 
     @classmethod
     def validate_warcraft_base(cls, path: str) -> bool:
+
+        if path == "release":
+            return True
+        
         if not path or not os.path.isdir(path):
             return False
 

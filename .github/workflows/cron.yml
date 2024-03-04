@@ -55,12 +55,6 @@ jobs:
         # load most recently created cache
         restore-keys: |
           ${{ runner.os }}-ah-
-    - name: Check secrets
-      run: |
-        echo "BN_CLIENT_ID: ${{ secrets.BN_CLIENT_ID }}"
-        echo "BN_CLIENT_SECRET: ${{ secrets.BN_CLIENT_SECRET }}"
-        echo "BN_OAUTH_URL: ${{ secrets.BN_OAUTH_URL }}"
-        echo "BN_OAUTH_URL_CN: ${{ secrets.BN_OAUTH_URL_CN }}"
     - name: Run AH Update
       env:
         BN_CLIENT_ID: ${{ secrets.BN_CLIENT_ID }}
@@ -96,3 +90,7 @@ jobs:
           ${{ env.DB_PATH }}/*eu*.gz
           ${{ env.DB_PATH }}/*eu*.bin
           ${{ env.DB_PATH }}/*eu*.json
+    - name: Reset Rate Limit (sleep 1 minute)
+      run: sleep 60
+    - name: Reset Rate Limit (sleep 1 minute)
+      run: python -m ah.tsm_exporter --repo https://github.com/void7604/Kamoo-s-TSM-App eu

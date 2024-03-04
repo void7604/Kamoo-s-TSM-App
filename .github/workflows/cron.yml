@@ -65,36 +65,12 @@ jobs:
         BN_OAUTH_URL_CN: ${{ vars.BN_OAUTH_URL_CN }}
       run: >
         printf %s\\n 
-        retail tw classic tw classic_wlk tw 
-        retail kr classic kr classic_wlk kr 
-        classic us classic eu |
+        retail eu retail us |
         xargs -n2 
         python -m ah.updater 
         ${{ inputs.compress_all && '--compress_all ' || ' ' }}
         --db_path ${{ env.DB_PATH }} 
         --game_version 
-    - name: Release DB - TW
-      uses: softprops/action-gh-release@4634c16e79c963813287e889244c50009e7f0981
-      with:
-        tag_name: latest
-        files: |
-          ${{ env.DB_PATH }}/*tw*.gz
-          ${{ env.DB_PATH }}/*tw*.bin
-          ${{ env.DB_PATH }}/*tw*.json
-        name: DB ${{ env.JOB_START_TS }}
-    - name: Reset Rate Limit (sleep 1 minute)
-      run: sleep 60
-    - name: Release DB - KR
-      uses: softprops/action-gh-release@4634c16e79c963813287e889244c50009e7f0981
-      with:
-        tag_name: latest
-        files: |
-          ${{ env.DB_PATH }}/*kr*.gz
-          ${{ env.DB_PATH }}/*kr*.bin
-          ${{ env.DB_PATH }}/*kr*.json
-        name: DB ${{ env.JOB_START_TS }}
-    - name: Reset Rate Limit (sleep 1 minute)
-      run: sleep 60
     - name: Release DB - US
       uses: softprops/action-gh-release@4634c16e79c963813287e889244c50009e7f0981
       with:

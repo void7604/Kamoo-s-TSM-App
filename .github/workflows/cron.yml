@@ -55,6 +55,12 @@ jobs:
         # load most recently created cache
         restore-keys: |
           ${{ runner.os }}-ah-
+    - name: Check secrets
+      run: |
+        echo "BN_CLIENT_ID: ${{ secrets.BN_CLIENT_ID }}"
+        echo "BN_CLIENT_SECRET: ${{ secrets.BN_CLIENT_SECRET }}"
+        echo "BN_OAUTH_URL: ${{ secrets.BN_OAUTH_URL }}"
+        echo "BN_OAUTH_URL_CN: ${{ secrets.BN_OAUTH_URL_CN }}"
     - name: Run AH Update
       env:
         BN_CLIENT_ID: ${{ secrets.BN_CLIENT_ID }}
@@ -64,8 +70,6 @@ jobs:
         BN_OAUTH_URL: ${{ vars.BN_OAUTH_URL }}
         BN_OAUTH_URL_CN: ${{ vars.BN_OAUTH_URL_CN }}
       run: >
-        echo "BN_CLIENT_ID: ${{ secrets.BN_CLIENT_ID }}"
-        echo "BN_CLIENT_SECRET: ${{ secrets.BN_CLIENT_SECRET }}"
         printf %s\\n 
         retail eu retail us |
         xargs -n2 

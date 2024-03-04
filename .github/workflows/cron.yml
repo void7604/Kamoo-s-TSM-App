@@ -11,7 +11,7 @@ on:
 
   schedule:
   # 12 times a day
-  - cron: '0 */2 * * *'
+  - cron: '0 * * * *'
 
 
 jobs:

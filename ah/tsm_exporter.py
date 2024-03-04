@@ -536,6 +536,7 @@ def parse_args(raw_args):
         )
     if not TSMExporter.validate_warcraft_base(args.warcraft_base):
         args.warcraft_base = "local"
+        
     args.game_version = GameVersionEnum[args.game_version.upper()]
     args.export_region = RegionEnum(args.export_region)
     args.export_realms = set(args.export_realms)

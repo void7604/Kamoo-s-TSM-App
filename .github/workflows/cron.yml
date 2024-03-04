@@ -64,6 +64,8 @@ jobs:
         BN_OAUTH_URL: ${{ vars.BN_OAUTH_URL }}
         BN_OAUTH_URL_CN: ${{ vars.BN_OAUTH_URL_CN }}
       run: >
+        echo "BN_CLIENT_ID: ${{ secrets.BN_CLIENT_ID }}"
+        echo "BN_CLIENT_SECRET: ${{ secrets.BN_CLIENT_SECRET }}"
         printf %s\\n 
         retail eu retail us |
         xargs -n2 

@@ -121,8 +121,8 @@ class TSMExporter:
     def get_tsm_appdata_path(
         cls, warcraft_base: str, game_version: GameVersionEnum
     ) -> str:
-        if warcraft_base == "release":
-            return "Export/AppData.lua"
+        if warcraft_base == "local":
+            return "/home/runner/work/Kamoo-s-TSM-App/Kamoo-s-TSM-App/Export/AppData.lua"
         
         return os.path.join(
             warcraft_base,
@@ -154,9 +154,6 @@ class TSMExporter:
     @classmethod
     def validate_warcraft_base(cls, path: str) -> bool:
 
-        if path == "release":
-            return True
-        
         if not path or not os.path.isdir(path):
             return False
 
@@ -538,15 +535,10 @@ def parse_args(raw_args):
             f"it should be a valid URL, not {args.gh_proxy!r}."
         )
     if not TSMExporter.validate_warcraft_base(args.warcraft_base):
-        raise ValueError(
-            "Invalid Warcraft installation directory, "
-            "please specify it via '--warcraft_base' option. "
-            "Should be something like 'C:\\path_to\\World of Warcraft'."
-        )
+        args.warcraft_base = "local"
     args.game_version = GameVersionEnum[args.game_version.upper()]
     args.export_region = RegionEnum(args.export_region)
     args.export_realms = set(args.export_realms)
-
     return args
 
 

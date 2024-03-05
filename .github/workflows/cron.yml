@@ -72,7 +72,7 @@ jobs:
         --db_path ${{ env.DB_PATH }} 
         --game_version 
     - name: export AppData
-      run: python -m ah.tsm_exporter --repo https://github.com/void7604/Kamoo-s-TSM-App --warcraft_base "" --game_version retail  eu 'Tarren Mill' 'Area 52'
+      run: python -m ah.tsm_exporter --db_path ${{ env.DB_PATH }} --warcraft_base "" --game_version retail  eu 'Tarren Mill' 'Area 52'
     - name: release AppData
       uses: softprops/action-gh-release@4634c16e79c963813287e889244c50009e7f0981
       with:
